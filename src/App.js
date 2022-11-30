@@ -61,14 +61,15 @@ const drumPads = [
 
 function App() {
   const [active, setActive] = useState('')
+  
+  function handleKeyPress(event){
+    playSound(event.key.toUpperCase())
+  }
+
   useEffect(() => {
     document.addEventListener('keydown', handleKeyPress);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  function handleKeyPress(event){
-      playSound(event.key.toUpperCase())
-    
-  }
 
   function playSound(selector){
     const audio = document.getElementById(selector);
