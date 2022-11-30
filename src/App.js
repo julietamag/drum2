@@ -66,8 +66,6 @@ function App() {
   }, [])
 
   function handleKeyPress(event){
-    // if (event.key === drumPads.keyCode) {
-      console.log(event.key)
       playSound(event.key.toUpperCase())
     
   }
