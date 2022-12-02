@@ -60,10 +60,17 @@ const drumPads = [
 ]
 
 function App() {
-  const [active, setActive] = useState('')
+  const [active, setActive] = useState('');
+  const [volume, setVolume] = useState(1);
   
   function handleKeyPress(event){
-    playSound(event.key.toUpperCase())
+    const key = event.key.toUpperCase()
+    let pressedKey = document.getElementById(key)
+    if(pressedKey === null) return pressedKey = 'not correct key'
+    if(key === pressedKey.id){
+      playSound(key)
+      handleColor(event.keyCode)
+    } 
   }
 
   useEffect(() => {
@@ -74,20 +81,32 @@ function App() {
   function playSound(selector){
     const audio = document.getElementById(selector);
     setActive(selector);
-    // setTimeout((() => setActive(false)), 200);
+    audio.volume = volume;
+    console.log(audio.volume)
     audio.play();
+  }
+  
+  function handleColor(color){
+    const key = document.getElementById(color)
+    key.style.backgroundColor = '#8D99AE';
+    setTimeout(() => key.style.backgroundColor = 'white', 200)
   }
 
   return (
     <div className="App">
+      <h1 id='mainTitle'>Chichu On the Drums</h1>
      <div id='drum-machine'>
         <div id='drum-pads'>
           {drumPads.map((drumPad) => (
             <div 
-            className={`drum-pad ${active}`} 
-            id={drumPad.id}
-            onClick={() => {playSound(drumPad.keyTrigger)}}
-            key={drumPad.id}
+            style={{border: `5px solid ${drumPad.borderColor}`}}
+            className='drum-pad'
+            id={drumPad.keyCode}
+            key={drumPad.keyCode}
+            onClick={() => {
+              playSound(drumPad.keyTrigger)
+              handleColor(drumPad.keyCode)
+            }}
             >
               {drumPad.keyTrigger}
               <audio
@@ -103,6 +122,20 @@ function App() {
         <h2>
           {active}
         </h2>
+      </div>
+      <div id='volumeSlider'>
+        <input
+        className="slider" 
+        id="myRange"
+        type='range'
+        step='0.01'
+        max='1'
+        min='0'
+        value={volume}
+        onChange={(e) => setVolume(e.target.value)}
+        > 
+        </input>
+        <h2>- VOLUME +</h2>
       </div>
         </div>
      </div>
