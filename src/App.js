@@ -22,7 +22,7 @@ const drumPads = [
     keyCode: 69,
     keyTrigger: 'E',
     id: 'Testraño Porito',
-    url: "public/resources/audio/testranioPorito.mp3"
+    url: "./resources/audio/aYepico.mp3"
   },
   {
     borderColor: '#057AEB',
