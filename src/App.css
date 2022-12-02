@@ -137,6 +137,9 @@ input[type="range"]:focus::-moz-range-thumb{
 }
 
 @media screen and (max-width: 600px){
+  .App{
+    height: fit-content;
+  }
   #drum-machine{
     width: 20rem;
     height: fit-content;
